@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent, useState } from "react";
+import "./pageStyles.css";
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
@@ -45,28 +46,30 @@ export default function Home() {
 
   return (
     <main>
-      <h1>Welcome to clipFarmer</h1>
-      <h3>Inserjendwkent a video as input and get viral clips out of these</h3>
-
+      <h1>ClipFarmer.io</h1>
+      <div className="marquee-container">
+        <h3>Insert a video as input and get viral clips out of these</h3>
+      </div>
       <input type="file" accept="video/*" onChange={handleChange} />
 
       {previewUrl && (
         <>
-          <h4>Input video</h4>
+          <h4></h4>
           <video src={previewUrl} controls className="mt-4 w-full" />
         </>
       )}
 
       {file && (
-        <button type="button" onClick={handleSubmit} disabled={loading}>
-          {loading ? "Processing..." : "Generate Clips"}
+        <button type="button" disabled={loading} className="generate">
+          <div className="top">{loading ? "Processing..." : "Generate Clips"}</div>
+          <div className="bottom"></div>
         </button>
       )}
 
       {outputUrl && (
         <>
           <h4>Output vid</h4>
-          <video src={outputUrl} controls className="mt-4 w-full" />
+          <video src={outputUrl} controls className="mt-4 w-full outputVid" />
         </>
       )}
     </main>
