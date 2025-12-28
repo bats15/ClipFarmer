@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <main>
       <h1>Welcome to clipFarmer</h1>
-      <h3>Insert a video as input and get viral clips out of these</h3>
+      <h3>Inserjendwkent a video as input and get viral clips out of these</h3>
 
       <input type="file" accept="video/*" onChange={handleChange} />
 
