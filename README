@@ -1,114 +1,177 @@
-ClipFarmer is an end-to-end video processing system that converts long videos into short, vertical, attention-optimized clips by:-
-->Detecting the loudest segment of the video (most engaging moment)
-->Tracking faces frame-by-frame
-->Cropping the video to a 9:16 vertical format, keeping the subject centered
-->Preserving original audio
-->Delivering a ready-to-post clip for platforms like Reels, Shorts, and TikTok
-->The system is deployed on AWS EC2, powered by FastAPI, FFmpeg, MediaPipe, and a Next.js frontend.
+ClipFarmer
 
+Automatic Short-Form Video Generation Pipeline
 
+Overview
 
-How It Works (Pipeline)
-User Upload
+ClipFarmer is an end-to-end video processing system that converts long-form videos into short, vertically cropped clips optimized for short-form platforms (Reels, Shorts, TikTok).
+
+The system automatically:
+
+identifies the most engaging segment of a video using audio intensity,
+
+tracks faces frame-by-frame,
+
+dynamically crops the video to a 9:16 aspect ratio while keeping the subject centered,
+
+preserves the original audio track,
+
+returns a ready-to-publish output clip.
+
+The project is deployed using a FastAPI backend on AWS EC2 and a Next.js frontend on Vercel.
+
+Key Features
+
+Audio-based highlight extraction (loudest segment detection)
+
+Face-aware dynamic cropping
+
+Automatic 16:9 to 9:16 conversion
+
+Smooth center tracking with temporal stabilization
+
+Audio remuxing without re-encoding
+
+Cloud-hosted backend with real video workloads
+
+Web-based frontend for upload and preview
+
+Processing Pipeline
+Video Upload
    ↓
-Audio Analysis (FFmpeg)
+Audio Energy Analysis (FFmpeg)
    ↓
-Extract Loudest 30s Segment
+Loudest Segment Extraction
    ↓
-Frame-by-frame Face Detection (MediaPipe)
+Frame-by-Frame Face Detection
    ↓
-Smooth Center Tracking
+Smoothed Subject Tracking
    ↓
-Vertical Crop (9:16)
+Vertical Cropping (9:16)
    ↓
-Audio Re-muxing
+Audio-Video Remuxing
    ↓
 Final Output Video
 
+Architecture
+Frontend
 
-
-Architecture Overview
-
-Frontend:-
 Next.js (App Router)
+
 Deployed on Vercel
-Handles file selection, previews, and output playback
 
-Backend:-
+Handles file selection, preview, and playback
+
+Backend
+
 FastAPI (Python)
-Hosted on AWS EC2
-Handles video processing, ML inference, and FFmpeg orchestration
 
-Processing Stack:-
-FFmpeg → audio analysis & remuxing
-MediaPipe (Face Detection) → subject tracking
-OpenCV → frame manipulation
+Deployed on AWS EC2
 
+Orchestrates video processing and ML inference
 
+Core Technologies
 
+FFmpeg for audio analysis and media remuxing
+
+MediaPipe for face detection
+
+OpenCV for frame manipulation
+
+NumPy for numeric operations
+
+Repository Structure
+.
+├── main.py          # FastAPI application
+├── loudest.py       # Audio-based clip extraction
+├── process.py       # Face tracking and cropping
+├── tmp/             # Temporary processing directory
+├── frontend/        # Next.js frontend
+└── README.md
 
 Running Locally
+Backend
+Requirements
 
-Backend (Python)::
-Requirements:-
-Python 3.10+ (recommended)
-FFmpeg
-Linux / WSL / macOS
+Python 3.10 recommended
+
+FFmpeg installed
+
+Linux, macOS, or WSL
+
+Install dependencies:
+
 pip install fastapi uvicorn mediapipe==0.10.14 opencv-python numpy
 sudo apt install ffmpeg libgl1
-Run:
+
+
+Run the server:
+
 uvicorn main:app --host 0.0.0.0 --port 8000
-Access API docs:
+
+
+API documentation:
+
 http://localhost:8000/docs
 
-
-Frontend (Next.js):-
+Frontend
 cd frontend
 npm install
 npm run dev
+
+
 Open:
+
 http://localhost:3000
 
-
-
-
-Deployment Notes:-
-
+Deployment Notes
 Backend (AWS EC2)
-->Runs continuously using tmux or systemd
-->Handles large video uploads and long-running processing jobs
-->Designed to scale horizontally if needed
+
+Runs as a long-lived service (tmux or systemd)
+
+Designed to handle large video uploads
+
+Performs CPU-intensive processing tasks
 
 Frontend (Vercel)
-->Static + client-side rendering
-->Due to Vercel upload limits, large video uploads should be ->handled directly via the backend or object storage (S3/R2)
 
+Used for UI and client interaction
 
+Large file uploads are not routed through Vercel API routes due to size limits
 
-Known Limitations:-
--> Vercel API routes have upload size limits
--> MediaPipe on Python 3.12 can be unstable (Python 3.10 recommended)
--> Single-worker backend (by design) to avoid FFmpeg race conditions
+Production setup should use direct backend uploads or object storage (S3 / R2)
 
+Known Constraints
 
-Future Improvements:-
--> Progress tracking (WebSockets)
--> Multiple clip generation per video
--> S3 / Cloudflare R2 direct uploads
--> Multi-face prioritization
--> GPU acceleration
--> Batch processing & queues (Celery / Redis)
+Vercel API routes impose strict payload size limits
 
+MediaPipe is more stable on Python 3.10 than 3.12
 
-ClipFarmer isn’t a demo script — it’s a production-style system that combines:
--> Real ML inference
--> Real video pipelines
--> Real cloud deployment
--> Real frontend-backend integration
--> It reflects how modern AI-powered media products are actually built.
+Single-worker configuration recommended to avoid FFmpeg race conditions
 
+Future Work
 
-Author::
+Progress tracking via WebSockets
+
+Multi-clip generation per video
+
+Direct uploads using object storage
+
+Improved multi-face handling
+
+GPU acceleration
+
+Job queue and background workers
+
+Motivation
+
+ClipFarmer is built as a practical system rather than a demo.
+It focuses on real-world constraints such as media processing performance, deployment issues, and frontend-backend interaction at scale.
+
+Author
+
 Basit Warsi
-CSE @ IIT Jammu
-Interests: Applied ML, Video Intelligence, Systems, Startups
+Undergraduate, Computer Science
+Indian Institute of Technology Jammu
+
+Interests: applied machine learning, video intelligence, backend systems
