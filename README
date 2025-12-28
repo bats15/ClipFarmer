@@ -1,43 +1,15 @@
-ClipFarmer
+ClipFarmer is an end-to-end video processing system that converts long videos into short, vertical, attention-optimized clips by:-
+->Detecting the loudest segment of the video (most engaging moment)
+->Tracking faces frame-by-frame
+->Cropping the video to a 9:16 vertical format, keeping the subject centered
+->Preserving original audio
+->Delivering a ready-to-post clip for platforms like Reels, Shorts, and TikTok
+->The system is deployed on AWS EC2, powered by FastAPI, FFmpeg, MediaPipe, and a Next.js frontend.
 
-Automatic Short-Form Video Generation Pipeline
 
-Overview
 
-ClipFarmer is an end-to-end video processing system that converts long-form videos into short, vertically cropped clips optimized for short-form platforms (Reels, Shorts, TikTok).
-
-The system automatically:
-
-identifies the most engaging segment of a video using audio intensity,
-
-tracks faces frame-by-frame,
-
-dynamically crops the video to a 9:16 aspect ratio while keeping the subject centered,
-
-preserves the original audio track,
-
-returns a ready-to-publish output clip.
-
-The project is deployed using a FastAPI backend on AWS EC2 and a Next.js frontend on Vercel.
-
-Key Features
-
-Audio-based highlight extraction (loudest segment detection)
-
-Face-aware dynamic cropping
-
-Automatic 16:9 to 9:16 conversion
-
-Smooth center tracking with temporal stabilization
-
-Audio remuxing without re-encoding
-
-Cloud-hosted backend with real video workloads
-
-Web-based frontend for upload and preview
-
-Processing Pipeline
-Video Upload
+How It Works (Pipeline)
+User Upload
    ↓
 Audio Energy Analysis (FFmpeg)
    ↓
@@ -171,7 +143,5 @@ It focuses on real-world constraints such as media processing performance, deplo
 Author
 
 Basit Warsi
-Undergraduate, Computer Science
-Indian Institute of Technology Jammu
-
-Interests: applied machine learning, video intelligence, backend systems
+CSE @ IIT Jammu
+Interests: Applied ML, Video Intelligence, Systems, Startups
