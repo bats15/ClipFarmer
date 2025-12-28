@@ -60,7 +60,7 @@ export default function Home() {
       )}
 
       {file && (
-        <button type="button" disabled={loading} className="generate">
+        <button type="button" onClick = {handleSubmit} disabled={loading} className="generate">
           <div className="top">{loading ? "Processing..." : "Generate Clips"}</div>
           <div className="bottom"></div>
         </button>
