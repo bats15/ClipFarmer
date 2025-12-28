@@ -1,3 +1,5 @@
+CLIPFARMER
+
 ClipFarmer is an end-to-end video processing system that converts long videos into short, vertical, attention-optimized clips by:-
 ->Detecting the loudest segment of the video (most engaging moment)
 ->Tracking faces frame-by-frame
