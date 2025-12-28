@@ -11,137 +11,104 @@ ClipFarmer is an end-to-end video processing system that converts long videos in
 How It Works (Pipeline)
 User Upload
    ↓
-Audio Energy Analysis (FFmpeg)
+Audio Analysis (FFmpeg)
    ↓
-Loudest Segment Extraction
+Extract Loudest 30s Segment
    ↓
-Frame-by-Frame Face Detection
+Frame-by-frame Face Detection (MediaPipe)
    ↓
-Smoothed Subject Tracking
+Smooth Center Tracking
    ↓
-Vertical Cropping (9:16)
+Vertical Crop (9:16)
    ↓
-Audio-Video Remuxing
+Audio Re-muxing
    ↓
 Final Output Video
 
-Architecture
-Frontend
 
+
+Architecture Overview
+
+Frontend:-
 Next.js (App Router)
-
 Deployed on Vercel
+Handles file selection, previews, and output playback
 
-Handles file selection, preview, and playback
-
-Backend
-
+Backend:-
 FastAPI (Python)
+Hosted on AWS EC2
+Handles video processing, ML inference, and FFmpeg orchestration
 
-Deployed on AWS EC2
+Processing Stack:-
+FFmpeg → audio analysis & remuxing
+MediaPipe (Face Detection) → subject tracking
+OpenCV → frame manipulation
 
-Orchestrates video processing and ML inference
 
-Core Technologies
 
-FFmpeg for audio analysis and media remuxing
-
-MediaPipe for face detection
-
-OpenCV for frame manipulation
-
-NumPy for numeric operations
-
-Repository Structure
-.
-├── main.py          # FastAPI application
-├── loudest.py       # Audio-based clip extraction
-├── process.py       # Face tracking and cropping
-├── tmp/             # Temporary processing directory
-├── frontend/        # Next.js frontend
-└── README.md
 
 Running Locally
-Backend
-Requirements
 
-Python 3.10 recommended
-
-FFmpeg installed
-
-Linux, macOS, or WSL
-
-Install dependencies:
-
+Backend (Python)::
+Requirements:-
+Python 3.10+ (recommended)
+FFmpeg
+Linux / WSL / macOS
 pip install fastapi uvicorn mediapipe==0.10.14 opencv-python numpy
 sudo apt install ffmpeg libgl1
-
-
-Run the server:
-
+Run:
 uvicorn main:app --host 0.0.0.0 --port 8000
-
-
-API documentation:
-
+Access API docs:
 http://localhost:8000/docs
 
-Frontend
+
+Frontend (Next.js):-
 cd frontend
 npm install
 npm run dev
-
-
 Open:
-
 http://localhost:3000
 
-Deployment Notes
+
+
+
+Deployment Notes:-
+
 Backend (AWS EC2)
-
-Runs as a long-lived service (tmux or systemd)
-
-Designed to handle large video uploads
-
-Performs CPU-intensive processing tasks
+->Runs continuously using tmux or systemd
+->Handles large video uploads and long-running processing jobs
+->Designed to scale horizontally if needed
 
 Frontend (Vercel)
+->Static + client-side rendering
+->Due to Vercel upload limits, large video uploads should be ->handled directly via the backend or object storage (S3/R2)
 
-Used for UI and client interaction
 
-Large file uploads are not routed through Vercel API routes due to size limits
 
-Production setup should use direct backend uploads or object storage (S3 / R2)
+Known Limitations:-
+-> Vercel API routes have upload size limits
+-> MediaPipe on Python 3.12 can be unstable (Python 3.10 recommended)
+-> Single-worker backend (by design) to avoid FFmpeg race conditions
 
-Known Constraints
 
-Vercel API routes impose strict payload size limits
+Future Improvements:-
+-> Progress tracking (WebSockets)
+-> Multiple clip generation per video
+-> S3 / Cloudflare R2 direct uploads
+-> Multi-face prioritization
+-> GPU acceleration
+-> Batch processing & queues (Celery / Redis)
 
-MediaPipe is more stable on Python 3.10 than 3.12
 
-Single-worker configuration recommended to avoid FFmpeg race conditions
+ClipFarmer isn’t a demo script — it’s a production-style system that combines:
+-> Real ML inference
+-> Real video pipelines
+-> Real cloud deployment
+-> Real frontend-backend integration
+-> It reflects how modern AI-powered media products are actually built.
 
-Future Work
 
-Progress tracking via WebSockets
-
-Multi-clip generation per video
-
-Direct uploads using object storage
-
-Improved multi-face handling
-
-GPU acceleration
-
-Job queue and background workers
-
-Motivation
-
-ClipFarmer is built as a practical system rather than a demo.
-It focuses on real-world constraints such as media processing performance, deployment issues, and frontend-backend interaction at scale.
-
-Author
-
+Author::
 Basit Warsi
 CSE @ IIT Jammu
 Interests: Applied ML, Video Intelligence, Systems, Startups
