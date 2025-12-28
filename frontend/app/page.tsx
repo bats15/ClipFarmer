@@ -27,7 +27,7 @@ export default function Home() {
     const formData = new FormData();
     formData.append("video", file);
 
-    const res = await fetch("http://13.60.91.241:8000/process", {
+    const res = await fetch("/api/process", {
       method: "POST",
       body: formData,
     });
