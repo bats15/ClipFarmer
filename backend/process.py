@@ -20,8 +20,6 @@ fourcc = cv2.VideoWriter_fourcc(*"mp4v")
 TEMP_VIDEO = OUTPUT_VIDEO + "_temp.mp4"
 out = cv2.VideoWriter(TEMP_VIDEO, fourcc, fps, (crop_w, H))
 
-
-
 mp_face = mp.solutions.face_detection
 face_detector = mp_face.FaceDetection(
     model_selection=0,
@@ -39,7 +37,6 @@ while True:
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = face_detector.process(rgb)
 
-
     center_x = prev_center_x
 
     if results.detections is not None:
@@ -50,7 +47,10 @@ while True:
         box = best.location_data.relative_bounding_box
         center_x = int((box.xmin + box.width / 2) * W)
 
-    center_x = int(SMOOTHING * prev_center_x + (1 - SMOOTHING) * center_x)
+    center_x = int(
+        SMOOTHING * prev_center_x +
+        (1 - SMOOTHING) * center_x
+    )
     prev_center_x = center_x
 
     x1 = max(0, min(W - crop_w, center_x - crop_w // 2))
