@@ -17,9 +17,7 @@ export default function Home() {
     setPreviewUrl(URL.createObjectURL(f));
   };
 
-
   const handleSubmit = async () => {
-
     console.log("clicked");
     if (!file) return;
 
@@ -28,10 +26,11 @@ export default function Home() {
     const formData = new FormData();
     formData.append("video", file);
 
-    const res = await fetch("http://13.60.91.241:8000/process", {
+    const res = await fetch("https://api.clipfarmer.app/process", {
       method: "POST",
       body: formData,
     });
+
     if (!res.ok) {
       alert("Processing failed");
       setLoading(false);
@@ -60,8 +59,15 @@ export default function Home() {
       )}
 
       {file && (
-        <button type="button" onClick = {handleSubmit} disabled={loading} className="generate">
-          <div className="top">{loading ? "Processing..." : "Generate Clips"}</div>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={loading}
+          className="generate"
+        >
+          <div className="top">
+            {loading ? "Processing..." : "Generate Clips"}
+          </div>
           <div className="bottom"></div>
         </button>
       )}
