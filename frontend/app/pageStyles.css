@@ -301,3 +301,122 @@ main::after {
     text-transform: uppercase;
     color: #ffdbdb;
 }
+
+
+@media (max-width: 1024px) {
+    main {
+        padding: 30px 15px;
+    }
+
+    main h1 {
+        font-size: 3em;
+    }
+
+    .how {
+        gap: 20px;
+        font-size: 0.9rem;
+    }
+
+    video {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 20px 12px;
+    }
+
+    main h1 {
+        font-size: 2.2em;
+        text-shadow: 
+            2px 2px 0px #000,
+            4px 4px 0px #666;
+    }
+
+    .marquee-container h3 {
+        font-size: 1em;
+    }
+
+    input[type="file"] {
+        width: 100%;
+        font-size: 0.9em;
+        padding: 12px;
+    }
+
+    .top {
+        font-size: 1.2rem;
+    }
+
+    .how {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .footer {
+        margin-top: 8em;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    main h1 {
+        font-size: 1.7em;
+    }
+
+    .marquee-container h3 {
+        font-size: 0.85em;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .hero-text .sub {
+        font-size: 0.9rem;
+    }
+
+    .top {
+        font-size: 1rem;
+    }
+}
+
+
+main h1 {
+    font-size: clamp(1.8rem, 6vw, 4rem);
+}
+
+@media (max-width: 640px) {
+    input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .top,
+    .bottom {
+        font-size: 1.1rem;
+        padding: 0.6em 1em;
+    }
+}
+
+@media (max-width: 640px) {
+    .marquee-container h3 {
+        font-size: 0.95rem;
+    }
+}
+
+.footer {
+    margin-top: 6em;
+}
+
+@media (max-width: 768px) {
+    .how {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+}
