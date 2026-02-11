@@ -53,6 +53,9 @@ export default function Home() {
         <p className="sub">
           Built for creators, podcasters, and growth-focused channels.
         </p>
+        <p className="sub2">
+          Size limit is 100mb for now, we are working on increasing it in the near future. Stable videos are better
+        </p>
       </section>
 
       <section className="how">
