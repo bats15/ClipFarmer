@@ -46,6 +46,21 @@ export default function Home() {
   return (
     <main>
       <h1>ClipFarmer.io</h1>
+      <section className="hero-text">
+        <p>
+          Transform long-form videos into high-performing short clips using AI.
+        </p>
+        <p className="sub">
+          Built for creators, podcasters, and growth-focused channels.
+        </p>
+      </section>
+
+      <section className="how">
+        <div>01 — Upload Video</div>
+        <div>02 — AI Extracts Key Moments</div>
+        <div>03 — Download Viral Clips</div>
+      </section>
+
       <div className="marquee-container">
         <h3>Insert a video as input and get viral clips out of these</h3>
       </div>
@@ -78,6 +93,34 @@ export default function Home() {
           <video src={outputUrl} controls className="mt-4 w-full outputVid" />
         </>
       )}
+
+      <footer className="footer">
+        <div className="footer-inner">
+          <div className="footer-left">
+            <h3>ClipFarmer</h3>
+            <p>AI-powered tool to turn long videos into viral short clips.</p>
+          </div>
+
+          <div className="footer-right">
+            <h4>Credits</h4>
+            <p>
+              Built & Designed by{" "}
+              <a href="https://basitwarsi.vercel.app/" target="blank">
+                <span className="highlight-name">BASIT WARSI</span>
+              </a>
+            </p>
+            <a href="https://linkedin.com/in/basitwarsi" target="_blank">
+              LinkedIn
+            </a>
+            <br />
+            <a href="https://github.com/bats15" target="_blank">
+              GitHub
+            </a>
+            <br />
+            <p>© {new Date().getFullYear()} ClipFarmer</p>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

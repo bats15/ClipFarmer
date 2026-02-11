@@ -22,6 +22,7 @@ main {
         0 0 0 12px #fff,
         0 8px 16px rgba(0, 0, 0, 0.8);
     min-height: 100vh;
+    position: relative;
 }
 
 main h1 {
@@ -246,4 +247,57 @@ main::after {
 
 .generate:active .top{
     transform: translateY(10px);
+}
+
+
+main::before,
+main::after {
+    z-index: 0;
+}
+
+.footer {
+    margin-top: 23em;
+    position: relative;
+    z-index: 2;
+    color: #dbdbdb;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.highlight-name {
+    background: #fff;
+    color: #000;
+    padding: 2px 6px;
+    font-weight: 900;
+}
+
+.hero-text {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.hero-text p {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.hero-text .sub {
+    opacity: 0.6;
+    font-size: 1.1rem;
+}
+
+.how {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0 30px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    color: #ffdbdb;
 }

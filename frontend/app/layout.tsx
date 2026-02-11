@@ -12,12 +12,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "ClipFarmer",
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-    ],
+// app/layout.tsx
+
+export const metadata : Metadata = {
+  title: "ClipFarmer – AI Clip Generator",
+  description:
+    "Turn long videos into viral short clips automatically using AI.",
+  metadataBase: new URL("https://clipfarmer.app"),
+  openGraph: {
+    title: "ClipFarmer – AI Clip Generator",
+    description:
+      "Automatically turn long videos into viral short clips.",
+    url: "https://clipfarmer.app",
+    siteName: "ClipFarmer",
+    type: "website",
   },
 };
 
